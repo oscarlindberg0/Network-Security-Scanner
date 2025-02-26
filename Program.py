@@ -1,22 +1,15 @@
 from Scanner import Scanner
+from Output import Output
 
 scanner = Scanner()
+output = Output()
 
 # target network to scan
-target = "scanme.nmap.org"
+target = "instagram.com"
 args = ""
 
-# print scan results
-def print_results(scans):
-    for host in scans.all_hosts():
-        print("Host: ", host)
-        print("State: ", scans[host].state())
-        for proto in scans[host].all_protocols():
-            print("Protocol: ", proto)
-            ports = scans[host][proto].keys()
-            for port in ports:
-                print("Port: ", port, "State: ", scans[host][proto][port]['state'])
-
 scans = scanner.scan(target, args)
+lookup = scanner.lookup(target)
 
-print_results(scans)
+#output.print_results("scan", scans)
+output.print_results("lookup", lookup)
