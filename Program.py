@@ -1,20 +1,22 @@
-import nmap
+from Scanner import Scanner
 
-# create scanner
-scanner = nmap.PortScanner()
+scanner = Scanner()
 
 # target network to scan
 target = "scanme.nmap.org"
-
-# do a basic scan
-scanner.scan(target)
+args = ""
 
 # print scan results
-for host in scanner.all_hosts():
-    print("Host: ", host)
-    print("State: ", scanner[host].state())
-    for proto in scanner[host].all_protocols():
-        print("Protocol: ", proto)
-        ports = scanner[host][proto].keys()
-        for port in ports:
-            print("Port: ", port, "State: ", scanner[host][proto][port]['state'])
+def print_results(scans):
+    for host in scans.all_hosts():
+        print("Host: ", host)
+        print("State: ", scans[host].state())
+        for proto in scans[host].all_protocols():
+            print("Protocol: ", proto)
+            ports = scans[host][proto].keys()
+            for port in ports:
+                print("Port: ", port, "State: ", scans[host][proto][port]['state'])
+
+scans = scanner.scan(target, args)
+
+print_results(scans)
