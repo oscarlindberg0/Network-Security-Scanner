@@ -1,7 +1,6 @@
-from colorama import Fore, Style
 
 class Output:
-    
+
     def print_results(self, type, input):
 
         # find the right output format
@@ -20,6 +19,3 @@ class Output:
             case "lookup":
                 for dict in input:
                     print(f"{dict}: {input[dict]}")
-
-            case _:
-                print(Fore.RED + "print_results: invalid type" + Style.RESET_ALL)
