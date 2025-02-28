@@ -1,12 +1,11 @@
 import cmd, Scanner, Output
-from colorama import Fore, Style
 
 class CLI(cmd.Cmd):
     scanner = Scanner.Scanner()
     output = Output.Output()
 
     prompt = ">> "
-    intro = "här kommer det finnas lite schysst ascii art sen"
+    intro = output.startup_image()
 
     # constructor
     def __init__(self, completekey = "tab", stdin = None, stdout = None):
@@ -19,10 +18,6 @@ class CLI(cmd.Cmd):
     # post command hook after command is run
     def postcmd(self, stop, line):
         return super().postcmd(stop, line)
-    
-    # error generator
-    def error(self, text):
-        print(Fore.RED + "ERROR: " + Style.RESET_ALL + text)
 
 
 
@@ -41,7 +36,7 @@ class CLI(cmd.Cmd):
         args = ""
         words = line.split()
         if not words:
-            self.error("No target provided")
+            self.output.error("No target provided")
             return
         if len(words) > 1:
             args = words[1]
@@ -51,9 +46,13 @@ class CLI(cmd.Cmd):
     # lookup command
     def do_lookup(self, line):
         if not line:
-            self.error("No webaddress provided")
+            self.output.error("No webaddress provided")
             return
         self.output.print_results("lookup", self.scanner.lookup(line))
+
+    # exit the CLI
+    def do_quit(self, line):
+        return True
 
 #########################################
 #                                       #
@@ -66,7 +65,3 @@ class CLI(cmd.Cmd):
     # cleanup before exit
     def postloop(self):
         return super().postloop()
-
-    # exit the CLI
-    def do_quit(self, line):
-        return True
