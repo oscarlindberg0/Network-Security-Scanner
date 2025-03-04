@@ -7,6 +7,7 @@ This is an all-in-one **network scanner CLI**. It combines several existing appl
 ## Features
 -  Perform network scans with Nmap functionality.
 -  Perform lookups on web domains.
+-  Discover devices on local network.
 
 ---
 
