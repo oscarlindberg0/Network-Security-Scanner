@@ -1,15 +1,10 @@
 from colorama import Fore, Style
+import pyfiglet
 
 class Output:
 
     def startup_image(self):
-        print("""
-            ########################################
-            #                                      #
-            #             PLACEHOLDER              #
-            #                                      #
-            ########################################
-            """)
+        print(pyfiglet.figlet_format("Network Security Scanner", font= "5lineoblique"))
 
     def print_results(self, type, input):
 
