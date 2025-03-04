@@ -32,6 +32,18 @@ class Output:
                 for dict in input:
                     print(f"{dict + ":":<25} {input[dict]}")
 
+            # device discovery output
+            case "devices":
+                if len(input) == 0:
+                    print("No devices detected")
+                for device in input:
+                    print("DEVICE:")
+                    print(f"IP: {device["IP"]}, MAC: {device["MAC"]}")
+
+            # help text
+            case "help":
+                print("helptext")
+
             # wrong output format has been used to call the function
             case _:
                 self.error("Script is broken, wrong output type")

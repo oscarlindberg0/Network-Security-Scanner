@@ -29,7 +29,7 @@ class CLI(cmd.Cmd):
 
     # help command
     def do_help(self, line):
-        print("helptext")
+        self.output.print_results("help", None)
 
     # scan command
     def do_scan(self, line):
@@ -49,6 +49,10 @@ class CLI(cmd.Cmd):
             self.output.error("No webaddress provided")
             return
         self.output.print_results("lookup", self.scanner.lookup(line))
+
+    # device discovery command
+    def do_devices(self, line):
+        self.output.print_results("devices", self.scanner.discover_devices())
 
     # exit the CLI
     def do_quit(self, line):
